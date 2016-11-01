@@ -37,20 +37,20 @@ myApp.controller('UserController', ['$scope', '$http', '$location', 'StuffFactor
     }
   };
 
-  UserFactory.factoryCheckUser().then(function () {
+  StuffFactory.factoryCheckUser().then(function () {
     redirectHome();
-    $scope.userName = UserFactory.factoryGetUserName();
+    $scope.userName = StuffFactory.factoryGetUserName();
   });
 
 
   $scope.logout = function () {
-    UserFactory.factoryLogout().then(function () {
+    StuffFactory.factoryLogout().then(function () {
     redirectHome();
   });
   }
 
   function redirectHome() {
-    if (UserFactory.factoryGetUserName() === undefined) {
+    if (StuffFactory.factoryGetUserName() === undefined) {
       $location.path("/home");
     }
   }
