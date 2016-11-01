@@ -20,7 +20,7 @@ var pubsubsubscription = 'test_sub';
 
 var subscription = pubsub.subscription(pubsubsubscription);
 
-router.get('/', function (req, res) {
+//router.get('/', function (req, res) {
     function storeEvent(message) {
         var obj = [{
             gc_pub_sub_id: message.id,
@@ -78,8 +78,8 @@ router.get('/', function (req, res) {
             return obj;
         }
     };
-res.send({particle: 'bigquery storing'});
-});
+//res.send({particle: 'bigquery storing'});
+//});
 
 
 module.exports = router;
