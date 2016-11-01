@@ -11,6 +11,11 @@ myApp.controller('UserController', ['$scope', '$http', '$location', 'UserFactory
     });
   };
 
+  $scope.pubsub = function () {
+    $http.get('/particledata').then(function (response) {
+      $scope.data = JSON.stringify(response.data.particle);
+    });
+  };
   UserFactory.factoryCheckUser().then(function () {
     redirectHome();
     $scope.userName = UserFactory.factoryGetUserName();

@@ -12,6 +12,7 @@ var session = require('express-session');
 // Route includes
 var index = require('./routes/index');
 var data = require('./routes/data');
+var particledata = require('./routes/particledata');
 var user = require('./routes/user');
 var register = require('./routes/register');
 
@@ -39,6 +40,7 @@ app.use(passport.session());
 app.use('/register', register);
 app.use('/user', user);
 app.use('/data', data);
+app.use('/particledata', particledata);
 app.use('/*', index);
 
 // Mongo Connection //
