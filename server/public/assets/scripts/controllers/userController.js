@@ -3,6 +3,13 @@ myApp.controller('UserController', ['$scope', '$http', '$location', 'UserFactory
   console.log('checking user');
 
   $scope.userName = '';
+  $scope.data = '';
+
+  $scope.loadData = function () {
+    $http.get('/data').then(function (response) {
+      $scope.data = JSON.stringify(response.data);
+    });
+  };
 
   UserFactory.factoryCheckUser().then(function () {
     redirectHome();

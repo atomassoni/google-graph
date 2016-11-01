@@ -1,3 +1,5 @@
+require('dotenv').load();//loads environment variables locally
+
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -9,6 +11,7 @@ var session = require('express-session');
 
 // Route includes
 var index = require('./routes/index');
+var data = require('./routes/data');
 var user = require('./routes/user');
 var register = require('./routes/register');
 
@@ -35,6 +38,7 @@ app.use(passport.session());
 // Routes
 app.use('/register', register);
 app.use('/user', user);
+app.use('/data', data);
 app.use('/*', index);
 
 // Mongo Connection //
