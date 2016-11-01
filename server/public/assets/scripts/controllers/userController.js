@@ -9,6 +9,9 @@ myApp.controller('UserController', ['$scope', '$http', '$location', 'UserFactory
   $scope.loadData = function () {
     $http.get('/data').then(function (response) {
       $scope.data = response.data;
+      $scope.labels = response.data.map(function (item) {
+        return item.x;
+      });
       console.log(response.data);
     });
   };
