@@ -1,6 +1,5 @@
 myApp.factory('UserFactory', ['$http', function ($http) {
 
-
     // PRIVATE
     var userName = undefined;//user's username
 

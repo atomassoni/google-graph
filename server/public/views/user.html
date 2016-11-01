@@ -3,7 +3,11 @@
     <button class="btn btn-default" ng-click="logout()">Log Out</button>
 </div>
 
- <button class="btn btn-default" ng-click="loadData()">load data</button>
+ <button class="btn btn-default" ng-click="loadData()">show chart</button>
   <button class="btn btn-default" ng-click="pubsub()">run pubsub</button>
 
- {{data}}
+
+<canvas id="line" class="chart chart-line" chart-data="data"
+chart-labels="labels" chart-series="series" chart-options="options"
+chart-dataset-override="datasetOverride" chart-click="onClick"
+</canvas> 

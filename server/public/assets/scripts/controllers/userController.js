@@ -3,19 +3,37 @@ myApp.controller('UserController', ['$scope', '$http', '$location', 'UserFactory
   console.log('checking user');
 
   $scope.userName = '';
-  $scope.data = '';
+  $scope.data = [];
+   $scope.labels = [];
 
-  // $scope.loadData = function () {
-  //   $http.get('/data').then(function (response) {
-  //     $scope.data = JSON.stringify(response.data);
-  //   });
-  // };
+  $scope.loadData = function () {
+    $http.get('/data').then(function (response) {
+      $scope.data = response.data;
+      console.log(response.data);
+    });
+  };
 
-  // $scope.pubsub = function () {
-  //   $http.get('/particledata').then(function (response) {
-  //     $scope.data = JSON.stringify(response.data.particle);
-  //   });
-  // };
+
+  $scope.labels = [];
+  $scope.series = ['Series A'];
+
+  $scope.onClick = function (points, evt) {
+    console.log(points, evt);
+  };
+  //$scope.datasetOverride = [{ yAxisID: 'y-axis-1' }];
+  $scope.options = {
+    scales: {
+      yAxes: [
+        {
+          id: 'y-axis-1',
+          type: 'linear',
+          display: true,
+          position: 'left'
+        }
+      ]
+    }
+  };
+
   UserFactory.factoryCheckUser().then(function () {
     redirectHome();
     $scope.userName = UserFactory.factoryGetUserName();

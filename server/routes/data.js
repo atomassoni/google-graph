@@ -24,12 +24,26 @@ router.get('/', function (req, res) {
     var sunnyDataset = bigquery.dataset('test_set');
     var sunnyTable = sunnyDataset.table('test_table');
 
-    // Import data into a table.
-    sunnyTable.import('bigquery.json', function (err, job) {
-        if (err) {
-            console.log(err);
-        }
-    });
+    var query = 'SELECT data, published_at FROM' +
+        '[sunlights-147417:test_set.test_table]' +
+        'LIMIT 10';
+    var dataFromBigQuery = [];
+    bigquery.createQueryStream(query)
+        .on('error', console.error)
+        .on('data', function (row) {
+       
+            dataFromBigQuery.push(
+                {
+                    x: row.published_at,
+                    y: row.data
+                }
+            );
+
+        })
+        .on('end', function () {
+            res.send(dataFromBigQuery);
+        });
+
 });
 
 
