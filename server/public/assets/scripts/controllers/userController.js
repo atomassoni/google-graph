@@ -5,17 +5,17 @@ myApp.controller('UserController', ['$scope', '$http', '$location', 'UserFactory
   $scope.userName = '';
   $scope.data = '';
 
-  $scope.loadData = function () {
-    $http.get('/data').then(function (response) {
-      $scope.data = JSON.stringify(response.data);
-    });
-  };
+  // $scope.loadData = function () {
+  //   $http.get('/data').then(function (response) {
+  //     $scope.data = JSON.stringify(response.data);
+  //   });
+  // };
 
-  $scope.pubsub = function () {
-    $http.get('/particledata').then(function (response) {
-      $scope.data = JSON.stringify(response.data.particle);
-    });
-  };
+  // $scope.pubsub = function () {
+  //   $http.get('/particledata').then(function (response) {
+  //     $scope.data = JSON.stringify(response.data.particle);
+  //   });
+  // };
   UserFactory.factoryCheckUser().then(function () {
     redirectHome();
     $scope.userName = UserFactory.factoryGetUserName();
