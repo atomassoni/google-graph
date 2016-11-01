@@ -1,4 +1,4 @@
-myApp.factory('UserFactory', ['$http', function ($http) {
+myApp.factory('StuffFactory', ['$http', function ($http) {
 
     // PRIVATE
     var userName = undefined;//user's username

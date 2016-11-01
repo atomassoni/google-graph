@@ -1,4 +1,4 @@
-myApp.controller('UserController', ['$scope', '$http', '$location', 'UserFactory', function ($scope, $http, $location, UserFactory) {
+myApp.controller('UserController', ['$scope', '$http', '$location', 'StuffFactory', function ($scope, $http, $location, StuffFactory) {
   // This happens after view/controller loads -- not ideal but it works for now.
   console.log('checking user');
 
