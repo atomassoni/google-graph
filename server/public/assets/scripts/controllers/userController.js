@@ -1,24 +1,33 @@
-myApp.controller('UserController', ['$scope', '$http', '$location', 'StuffFactory', function ($scope, $http, $location, StuffFactory) {
+myApp.controller('UserController', ['$scope', '$http', '$location', 'UserFactory', 'DataFactory', function ($scope, $http, $location, UserFactory, DataFactory) {
   // This happens after view/controller loads -- not ideal but it works for now.
   console.log('checking user');
 
   $scope.userName = '';
   $scope.data = [];
-   $scope.labels = [];
+  $scope.labels = [];
+  $scope.series = ['Amount of light'];
+ 
 
   $scope.loadData = function () {
-    $http.get('/data').then(function (response) {
-      $scope.data = response.data;
-      $scope.labels = response.data.map(function (item) {
-        return item.x;
-      });
-      console.log(response.data);
+    //if(DataFactory.factoryGetBigQueryData()===undefined) {
+    DataFactory.factorySetBigQueryData().then(function () {
+      $scope.data = DataFactory.factoryGetBigQueryData();
+      DataFactory.factoryMakeLabels();
+      $scope.labels = DataFactory.factoryGetLabels();
+
     });
+
+    // } else {
+    //  $scope.data = DataFactory.factoryGetBigQueryData();
+    //}
+
   };
 
 
-  $scope.labels = [];
-  $scope.series = ['Series A'];
+  $scope.makeLabels = function (quantity) {
+    DataFactory.factoryMakeLabels(quantity);
+    $scope.labels = DataFactory.factoryGetLabels();
+  };
 
   $scope.onClick = function (points, evt) {
     console.log(points, evt);
@@ -28,7 +37,7 @@ myApp.controller('UserController', ['$scope', '$http', '$location', 'StuffFactor
     scales: {
       yAxes: [
         {
-          id: 'y-axis-1',
+         // id: 'y-axis-1',
           type: 'linear',
           display: true,
           position: 'left'
@@ -37,20 +46,20 @@ myApp.controller('UserController', ['$scope', '$http', '$location', 'StuffFactor
     }
   };
 
-  StuffFactory.factoryCheckUser().then(function () {
+  UserFactory.factoryCheckUser().then(function () {
     redirectHome();
-    $scope.userName = StuffFactory.factoryGetUserName();
+    $scope.userName = UserFactory.factoryGetUserName();
   });
 
 
   $scope.logout = function () {
-    StuffFactory.factoryLogout().then(function () {
-    redirectHome();
-  });
+    UserFactory.factoryLogout().then(function () {
+      redirectHome();
+    });
   }
 
   function redirectHome() {
-    if (StuffFactory.factoryGetUserName() === undefined) {
+    if (UserFactory.factoryGetUserName() === undefined) {
       $location.path("/home");
     }
   }

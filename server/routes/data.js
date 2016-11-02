@@ -26,7 +26,7 @@ router.get('/', function (req, res) {
 
     var query = 'SELECT data, published_at FROM' +
         '[sunlights-147417:test_set.test_table]' +
-        'LIMIT 10';
+        'LIMIT 100';
     var dataFromBigQuery = [];
     bigquery.createQueryStream(query)
         .on('error', console.error)
