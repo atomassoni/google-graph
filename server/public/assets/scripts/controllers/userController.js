@@ -1,4 +1,8 @@
-myApp.controller('UserController', ['$scope', '$http', '$location', 'UserFactory', 'DataFactory', function ($scope, $http, $location, UserFactory, DataFactory) {
+UserController.$inject = ['$scope', '$http', '$location', 'UserFactory', 'DataFactory'];
+
+myApp.controller('UserController', UserController);
+ 
+function UserController ($scope, $http, $location, UserFactory, DataFactory) {
   // This happens after view/controller loads -- not ideal but it works for now.
   console.log('checking user');
 
@@ -64,4 +68,4 @@ myApp.controller('UserController', ['$scope', '$http', '$location', 'UserFactory
     }
   }
 
-}]);
+};
